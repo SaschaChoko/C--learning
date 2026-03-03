@@ -1,43 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Library;
+using UtilityLibrary;
 
 class Program
 {
     static void Main()
     {
-        string title_kobsar = "Kobsar";
-        string author_kobsar = "Taras Shevchenko";
-        int pages_kobsar = 600;
-        
-        Book kobsar = new Book(title_kobsar, author_kobsar, pages_kobsar);
-        kobsar.PrintInfo(title_kobsar, author_kobsar, pages_kobsar);
+        SimpleCalculator calculator = new SimpleCalculator();
 
-        string title_berkut = "Zachar Berkut";
-        string author_berkut = "Ivan Franko";
-        int pages_berkut = 300;
+        int number_a = 5;
+        int number_b = 7;
 
-        Book berkut = new Book(title_berkut, author_berkut, pages_berkut);
-        berkut.PrintInfo(title_berkut, author_berkut, pages_berkut);
-    }
-}
-namespace Library
-{
-    class Book
-    {
-        public string title;
-        public string author;
-        public int pages;
-        public Book(string Title, string Author, int Pages)
-        {
-            title = Title;
-            author = Author;
-            pages = Pages;
-        }
-        public void PrintInfo(string title, string author, int pages)
-        {
-            Console.WriteLine($"Title: {title}, author: {author}, pages: {pages}.");
-        }
+        Console.WriteLine("Sum of a and b: " + calculator.Add(number_a, number_b));
+        Console.WriteLine("Multiply a and b: " + calculator.Multiply(number_a, number_b));
+        Console.WriteLine("Is a greater than b? " + calculator.IsGreater(number_a, number_b));
     }
 }
