@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 class Program
@@ -28,15 +27,20 @@ class Character
     {
         get { return health; }
         set 
-        { 
-            if (value < 0 || value > 100)
+        {
+            int newHealth = value;
+
+            if (newHealth < 0)
             {
-                Console.WriteLine("Incorrect indicators");
+                newHealth = 0;
             }
-            else
+
+            if (newHealth > 100)
             {
-                health = value;
+                newHealth = 100;
             }
+
+            health = newHealth;
         }
     }
     public string Strength { get; set; }
@@ -50,20 +54,47 @@ class Character
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if ( health < 0)
+        if (damage <= 0)
         {
-            health = 0;
+            damage = 0;
+        }
+        else
+        {
+            if (health < damage)
+            {
+                health = 0;
+            }
+
+            else
+            {
+                health -= damage;
+            }
         }
     }
     public void GainExperience(int xp)
     {
-        experience += xp;
-
-        if (experience >= 100)
+        if (xp < 0)
         {
-            level++;
-            experience = 0;
+            xp = 0;
+        }
+        else
+        {
+            experience += xp;
+        }
+        
+        bool xpGain = true;
+
+        while(xpGain)
+        {
+            if (experience >= 100)
+            {
+                level++;
+                experience -= 100;
+            }
+            else
+            {
+                xpGain = false;
+            }
         }
     }
 }
